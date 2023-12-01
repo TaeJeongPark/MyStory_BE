@@ -1,4 +1,4 @@
-package com.pip.picks.common.boilerplate;
+package supporty.info.mystory.common.boillerplate;
 
 import java.text.DecimalFormat;
 import java.util.concurrent.ThreadLocalRandom;
@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  * packageName    : com.pip.picks.common.boilerplate
  * fileName       : Boilerplate
  * author         : TaeJeongPark
- * date           : 2023/08/20
+ * date           : 2023/11/30
  * description    : 보일러플레이트
  * ===========================================================
  * DATE              AUTHOR             NOTE

@@ -1,4 +1,4 @@
-package supporty.info.mystory.common.entity;
+package supporty.info.mystory.common.utils;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
@@ -34,6 +34,5 @@ public abstract class BaseTimeEntity {
 
     @LastModifiedDate
     private LocalDateTime updateTime;
-
 
 }

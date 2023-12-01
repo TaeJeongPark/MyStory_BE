@@ -1,1 +1,66 @@
+####################################
+# ?? ? ???? ?? ??
+####################################
+server:
+  port: 80                    # ?? ??
+  servlet:
+    charset: UTF-8            # ?? ??? ??
+    enabled: true             # ??? ???
 
+spring:
+  banner:
+    location: banner/banner.txt # ?? ??
+  application:
+    name: picks               # ????? ??
+
+####################################
+# ?????? ??
+####################################
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mystory?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+#    url: jdbc:mysql://supporty.synology.me:3006?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: 992149
+
+####################################
+# JPA ??
+####################################
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: create    # create, update, ...
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy # ????? ???? ??? ??
+    show-sql: true          # SQL ?? ???
+    properties:
+      hibernate:
+        format_sql: true    # ?? ???? ???
+    database-platform: org.hibernate.dialect.MySQL8Dialect  # MySQL8 ?? ??
+
+####################################
+# ?? ?? ??
+####################################
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace  # ???? ??? ???? ??
+
+####################################
+# ??? ??? ?? ??
+####################################
+kakao:
+  client:
+    id: 772424d6f9f12c0080919dba87fcd137
+    secret: TeQNfhDJN2T1IrCbylsnxCXZNtBvVWMr
+  redirect:
+    url: http://localhost/login/kakao
+
+####################################
+# ChatGPT ?? ??
+####################################
+chatgpt:
+  api-key: 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

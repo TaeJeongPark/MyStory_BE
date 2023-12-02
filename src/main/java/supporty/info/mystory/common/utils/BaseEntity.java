@@ -24,7 +24,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class BaseEntity extends BaseTimeEntity {
+public abstract class BaseEntity extends BaseDateEntity {
 
     @CreatedBy
     @Column(updatable = false)

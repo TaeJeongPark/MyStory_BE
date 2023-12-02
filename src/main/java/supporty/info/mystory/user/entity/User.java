@@ -2,7 +2,7 @@ package supporty.info.mystory.user.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import supporty.info.mystory.common.utils.BaseTimeEntity;
+import supporty.info.mystory.common.utils.BaseDateEntity;
 import supporty.info.mystory.content.entity.StoryList;
 
 import java.time.LocalDateTime;
@@ -28,7 +28,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Table(name = "users")
-public class User extends BaseTimeEntity {
+public class User extends BaseDateEntity {
 
     @Id
     @Column(name = "user_id")

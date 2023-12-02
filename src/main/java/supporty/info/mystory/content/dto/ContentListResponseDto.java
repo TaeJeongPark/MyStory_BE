@@ -1,11 +1,5 @@
 package supporty.info.mystory.content.dto;
 
-import lombok.*;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
-import supporty.info.mystory.content.entity.Certificate;
-import supporty.info.mystory.content.entity.StoryList;
-
 /**
  * packageName    : supporty.info.mystory.content.dto
  * fileName       : ContentListResponseDto

@@ -22,7 +22,7 @@ import java.util.Optional;
  */
 public interface StoryListRepository extends JpaRepository<StoryList, Long> {
 
-    @Query(value = "SELECT s.title, s.reg_time, s.update_time, s.story_list_id as id FROM story_list s WHERE s.user_id = :userId", nativeQuery = true)
+    @Query(value = "SELECT s.title, s.reg_time as regTime, s.update_time as updateTime, s.story_list_id as id FROM story_list s WHERE s.user_id = :userId ORDER BY s.update_time DESC", nativeQuery = true)
     List<ContentListResponseDto> findByUserId(@Param("userId") Long userId);
 
 }

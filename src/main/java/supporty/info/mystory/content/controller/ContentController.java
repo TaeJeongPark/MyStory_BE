@@ -41,9 +41,9 @@ public class ContentController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<Msg> getContentList(@RequestParam Long id) throws Exception {
+    public ResponseEntity<Msg> getContentList(@RequestParam Long id, @RequestParam int page, @RequestParam int size) throws Exception {
 
-        List<ContentListResponseDto> result = contentService.getContentList(id);
+        List<ContentListResponseDto> result = contentService.getContentList(id, page, size);
 
         return ResponseEntity.ok().body(new Msg((result != null) ? "Success" : "Failed", result));
 

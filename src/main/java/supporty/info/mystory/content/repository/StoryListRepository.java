@@ -1,5 +1,6 @@
 package supporty.info.mystory.content.repository;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -7,7 +8,6 @@ import supporty.info.mystory.content.dto.ContentListResponseDto;
 import supporty.info.mystory.content.entity.StoryList;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * packageName    : supporty.info.mystory.content.repository
@@ -23,6 +23,6 @@ import java.util.Optional;
 public interface StoryListRepository extends JpaRepository<StoryList, Long> {
 
     @Query(value = "SELECT s.title, s.reg_time as regTime, s.update_time as updateTime, s.story_list_id as id FROM story_list s WHERE s.user_id = :userId ORDER BY s.update_time DESC, s.story_list_id DESC", nativeQuery = true)
-    List<ContentListResponseDto> findByUserId(@Param("userId") Long userId);
+    List<ContentListResponseDto> findByUserId(@Param("userId") Long userId, Pageable pageable);
 
 }

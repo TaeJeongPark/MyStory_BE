@@ -2,6 +2,8 @@ package supporty.info.mystory.content.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import supporty.info.mystory.content.dto.*;
@@ -209,11 +211,20 @@ public class ContentService {
 
     }
 
-    public List<ContentListResponseDto> getContentList(Long id) throws Exception {
+    /**
+     * 스토리 목록 조회
+     * @param id
+     * @param page
+     * @param size
+     * @return List<ContentListResponseDto>
+     */
+    @Transactional(readOnly = true)
+    public List<ContentListResponseDto> getContentList(Long id, int page, int size) throws Exception {
 
         if(id == null) throw new Exception("Failed get id");
 
-        List<ContentListResponseDto> storyList = storyListRepository.findByUserId(id);
+        Pageable pageable = PageRequest.of(page, size);
+        List<ContentListResponseDto> storyList = storyListRepository.findByUserId(id, pageable);
 
         log.info("==========> " + storyList.get(0).getId());
 
@@ -221,6 +232,12 @@ public class ContentService {
 
     }
 
+    /**
+     * 스토리 목록 상세 조회
+     * @param id
+     * @return ContentDto
+     */
+    @Transactional(readOnly = true)
     public ContentDto getContentDetail(Long id) throws Exception {
 
         if(id == null) throw new Exception("Failed get id");

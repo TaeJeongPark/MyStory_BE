@@ -3,6 +3,8 @@ package supporty.info.mystory.content.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import supporty.info.mystory.content.entity.ActivityExperience;
 
+import java.util.List;
+
 /**
  * packageName    : supporty.info.mystory.content.repository
  * fileName       : ActivityExperienceRepository
@@ -16,6 +18,6 @@ import supporty.info.mystory.content.entity.ActivityExperience;
  */
 public interface ActivityExperienceRepository extends JpaRepository<ActivityExperience, Long> {
 
-
+    List<ActivityExperience> findByStoryListId(Long storyListId);
 
 }

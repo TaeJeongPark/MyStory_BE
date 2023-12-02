@@ -3,6 +3,8 @@ package supporty.info.mystory.content.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import supporty.info.mystory.content.entity.SchoolHistory;
 
+import java.util.List;
+
 /**
  * packageName    : supporty.info.mystory.content.repository
  * fileName       : SchoolHistoryRepository
@@ -16,6 +18,6 @@ import supporty.info.mystory.content.entity.SchoolHistory;
  */
 public interface SchoolHistoryRepository extends JpaRepository<SchoolHistory, Long> {
 
-
+    List<SchoolHistory> findByStoryListId(Long storyListId);
 
 }

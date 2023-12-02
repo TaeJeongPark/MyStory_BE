@@ -1,6 +1,10 @@
 package supporty.info.mystory.content.dto;
 
 import lombok.*;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
+import supporty.info.mystory.content.entity.Awarded;
+import supporty.info.mystory.content.entity.Career;
 
 import java.time.LocalDateTime;
 
@@ -27,5 +31,23 @@ public class CareerDto {
     private String endMonth;                    // 경력 종료일
     private String duty;                        // 직무
     private String companyName;                 // 회사명
+
+    private static ModelMapper modelMapper = new ModelMapper();
+
+    // DTO -> Entity 변환
+    public Career dtoToEntity(CareerDto careerDto) {
+
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        return modelMapper.map(this, Career.class);
+
+    }
+
+    // Entity -> DTO 변환
+    public static CareerDto entityToDto(Career career) {
+
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        return modelMapper.map(career, CareerDto.class);
+
+    }
 
 }

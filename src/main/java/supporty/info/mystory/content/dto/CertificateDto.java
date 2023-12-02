@@ -27,7 +27,6 @@ public class CertificateDto {
     private String month;           // 자격증 취득년월
     private String name;            // 자격증명
 
-
     private static ModelMapper modelMapper = new ModelMapper();
 
     // DTO -> Entity 변환

@@ -3,6 +3,8 @@ package supporty.info.mystory.content.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import supporty.info.mystory.content.entity.Certificate;
 
+import java.util.List;
+
 /**
  * packageName    : supporty.info.mystory.content.entity
  * fileName       : CertificateRepository
@@ -16,6 +18,6 @@ import supporty.info.mystory.content.entity.Certificate;
  */
 public interface CertificateRepository extends JpaRepository<Certificate, Long> {
 
-
+    List<Certificate> findByStoryListId(Long storyListId);
 
 }

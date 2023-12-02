@@ -1,17 +1,13 @@
 package supporty.info.mystory.content.dto;
 
-import jakarta.persistence.Column;
 import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.sql.Blob;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * packageName    : supporty.info.mystory.content.dto
- * fileName       : ContentRequestDto
+ * fileName       : ContentDto
  * author         : TaeJeongPark
  * date           : 2023-12-02
  * description    : 스토리 목록 저장 요청 DTO
@@ -26,7 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Builder
-public class ContentRequestDto {
+public class ContentDto {
 
     private Long id;                            // 가입자 ID
 
@@ -56,16 +52,16 @@ public class ContentRequestDto {
     private String environment;                 // 환경
     private String etc;                         // 기타
 
-    private List<EducationDto> educations;      // 교육 정보
+    private List<EducationDto> educations = new ArrayList<>();      // 교육 정보
 
-    private List<ActivityDto> activities;       // 활동 정보
+    private List<ActivityDto> activities = new ArrayList<>();       // 활동 정보
 
-    private List<AwardedDto> awards;            // 수상 정보
+    private List<AwardedDto> awards = new ArrayList<>();            // 수상 정보
 
-    private List<CareerDto> careers;            // 경력 정보
+    private List<CareerDto> careers = new ArrayList<>();            // 경력 정보
 
-    private List<SchoolDto> schools;            // 학교 정보
+    private List<SchoolDto> schools = new ArrayList<>();            // 학교 정보
 
-    private List<CertificateDto> certificates;  // 자격증 정보
+    private List<CertificateDto> certificates = new ArrayList<>();  // 자격증 정보
 
 }

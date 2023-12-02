@@ -4,16 +4,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import supporty.info.mystory.content.dto.ContentListResponseDto;
-import supporty.info.mystory.content.dto.ContentRequestDto;
+import supporty.info.mystory.content.dto.*;
 import supporty.info.mystory.content.entity.*;
 import supporty.info.mystory.content.repository.*;
 import supporty.info.mystory.user.entity.User;
 import supporty.info.mystory.user.repository.UserRepository;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * packageName    : supporty.info.mystory.content.service
@@ -55,35 +52,35 @@ public class ContentService {
 
     /**
      * 스토리 목록 저장
-     * @param contentRequestDto
+     * @param contentDto
      * @return boolean
      */
     @Transactional
-    public boolean saveContent(ContentRequestDto contentRequestDto) throws Exception {
+    public boolean saveContent(ContentDto contentDto) throws Exception {
 
-        if(contentRequestDto == null) throw new Exception("Failed get contentRequestDto");
+        if(contentDto == null) throw new Exception("Failed get contentDto");
 
-        log.info("contentRequestDto : " + contentRequestDto);
+        log.info("contentDto : " + contentDto);
 
 
         // 사용자 조회
-        User user = userRepository.findById(contentRequestDto.getId())
+        User user = userRepository.findById(contentDto.getId())
                 .orElseThrow(() -> new Exception("Failed get user"));
 
 
         // 이력자 저장
         ResumeUser resumeUser = ResumeUser.builder()
-                .img(contentRequestDto.getImg())
-                .imgType(contentRequestDto.getImgType())
-                .imgUrl(contentRequestDto.getImgUrl())
-                .desireJob(contentRequestDto.getDesireJob())
-                .name(contentRequestDto.getName())
-                .birthday(contentRequestDto.getBirthday())
-                .email(contentRequestDto.getEmail())
-                .phone(contentRequestDto.getPhone())
-                .address(contentRequestDto.getAddress())
-                .military(contentRequestDto.getMilitary())
-                .introduction(contentRequestDto.getIntroduction())
+                .img(contentDto.getImg())
+                .imgType(contentDto.getImgType())
+                .imgUrl(contentDto.getImgUrl())
+                .desireJob(contentDto.getDesireJob())
+                .name(contentDto.getName())
+                .birthday(contentDto.getBirthday())
+                .email(contentDto.getEmail())
+                .phone(contentDto.getPhone())
+                .address(contentDto.getAddress())
+                .military(contentDto.getMilitary())
+                .introduction(contentDto.getIntroduction())
                 .build();
 
         resumeUserRepository.save(resumeUser);
@@ -91,12 +88,12 @@ public class ContentService {
 
         // 기술스택 저장
         Skill skill = Skill.builder()
-                .languages(contentRequestDto.getLanguages())
-                .frameworkLibrary(contentRequestDto.getFrameworkLibrary())
-                .server(contentRequestDto.getServer())
-                .toolDevops(contentRequestDto.getToolDevops())
-                .environment(contentRequestDto.getEnvironment())
-                .etc(contentRequestDto.getEtc())
+                .languages(contentDto.getLanguages())
+                .frameworkLibrary(contentDto.getFrameworkLibrary())
+                .server(contentDto.getServer())
+                .toolDevops(contentDto.getToolDevops())
+                .environment(contentDto.getEnvironment())
+                .etc(contentDto.getEtc())
                 .build();
 
         skillRepository.save(skill);
@@ -104,10 +101,10 @@ public class ContentService {
 
         // 자기소개 저장
         SelfIntroduction selfIntroduction = SelfIntroduction.builder()
-                .growth(contentRequestDto.getGrowth())
-                .reason(contentRequestDto.getReason())
-                .meritFault(contentRequestDto.getMeritFault())
-                .aspiration(contentRequestDto.getAspiration())
+                .growth(contentDto.getGrowth())
+                .reason(contentDto.getReason())
+                .meritFault(contentDto.getMeritFault())
+                .aspiration(contentDto.getAspiration())
                 .build();
 
         selfIntroductionRepository.save(selfIntroduction);
@@ -115,7 +112,7 @@ public class ContentService {
 
         // 스토리 목록 저장
         StoryList storyList = StoryList.builder()
-                .title(contentRequestDto.getTitle())
+                .title(contentDto.getTitle())
                 .user(user)
                 .resumeUser(resumeUser)
                 .skill(skill)
@@ -126,8 +123,8 @@ public class ContentService {
 
 
         // 자격증 저장
-        if(contentRequestDto.getCertificates() != null) {
-            contentRequestDto.getCertificates().forEach(certificate -> {
+        if(contentDto.getCertificates() != null) {
+            contentDto.getCertificates().forEach(certificate -> {
                 certificateRepository.save(Certificate.builder()
                                 .month(certificate.getMonth())
                                 .name(certificate.getName())
@@ -138,8 +135,8 @@ public class ContentService {
 
 
         // 교육 저장
-        if(contentRequestDto.getEducations() != null) {
-            contentRequestDto.getEducations().forEach(education -> {
+        if(contentDto.getEducations() != null) {
+            contentDto.getEducations().forEach(education -> {
                 educationRepository.save(Education.builder()
                                 .startMonth(education.getStartMonth())
                                 .endMonth(education.getEndMonth())
@@ -152,8 +149,8 @@ public class ContentService {
 
 
         // 수상 저장
-        if(contentRequestDto.getAwards() != null) {
-            contentRequestDto.getAwards().forEach(awarded -> {
+        if(contentDto.getAwards() != null) {
+            contentDto.getAwards().forEach(awarded -> {
                 awardedRepository.save(Awarded.builder()
                                 .month(awarded.getMonth())
                                 .name(awarded.getName())
@@ -165,8 +162,8 @@ public class ContentService {
 
 
         // 경력 저장
-        if(contentRequestDto.getCareers() != null) {
-            contentRequestDto.getCareers().forEach(career -> {
+        if(contentDto.getCareers() != null) {
+            contentDto.getCareers().forEach(career -> {
                 careerRepository.save(Career.builder()
                                 .startMonth(career.getStartMonth())
                                 .endMonth(career.getEndMonth())
@@ -179,8 +176,8 @@ public class ContentService {
 
 
         // 활동 경험 저장
-        if(contentRequestDto.getActivities() != null) {
-            contentRequestDto.getActivities().forEach(activity -> {
+        if(contentDto.getActivities() != null) {
+            contentDto.getActivities().forEach(activity -> {
                 activityExperienceRepository.save(ActivityExperience.builder()
                                 .startMonth(activity.getStartMonth())
                                 .endMonth(activity.getEndMonth())
@@ -192,8 +189,8 @@ public class ContentService {
 
 
         // 학력 저장
-        if(contentRequestDto.getSchools() != null) {
-            contentRequestDto.getSchools().forEach(school -> {
+        if(contentDto.getSchools() != null) {
+            contentDto.getSchools().forEach(school -> {
                 schoolHistoryRepository.save(SchoolHistory.builder()
                                 .startMonth(school.getStartMonth())
                                 .endMonth(school.getEndMonth())
@@ -221,6 +218,146 @@ public class ContentService {
         log.info("==========> " + storyList.get(0).getId());
 
         return storyList;
+
+    }
+
+    public ContentDto getContentDetail(Long id) throws Exception {
+
+        if(id == null) throw new Exception("Failed get id");
+
+        ContentDto contentDto = new ContentDto();
+
+        // 스토리 목록 정보
+        StoryList storyList = storyListRepository.findById(id)
+                .orElseThrow(() -> new Exception("Failed get storyList"));
+
+        contentDto.setId(storyList.getId());
+        contentDto.setTitle(storyList.getTitle());
+
+        // 이력자 정보
+        ResumeUser resumeUser = resumeUserRepository.findById(storyList.getResumeUser().getId())
+                .orElseThrow(() -> new Exception("Failed get resumeUser"));
+
+        contentDto.setImgUrl(resumeUser.getImgUrl());
+        contentDto.setDesireJob(resumeUser.getDesireJob());
+        contentDto.setName(resumeUser.getName());
+        contentDto.setBirthday(resumeUser.getBirthday());
+        contentDto.setEmail(resumeUser.getEmail());
+        contentDto.setPhone(resumeUser.getPhone());
+        contentDto.setAddress(resumeUser.getAddress());
+        contentDto.setMilitary(resumeUser.getMilitary());
+        contentDto.setIntroduction(resumeUser.getIntroduction());
+
+        // 기술스택 정보
+        Skill skill = skillRepository.findById(storyList.getSkill().getId())
+                .orElseThrow(() -> new Exception("Failed get skill"));
+
+        contentDto.setLanguages(skill.getLanguages());
+        contentDto.setFrameworkLibrary(skill.getFrameworkLibrary());
+        contentDto.setServer(skill.getServer());
+        contentDto.setToolDevops(skill.getToolDevops());
+        contentDto.setEnvironment(skill.getEnvironment());
+        contentDto.setEtc(skill.getEtc());
+
+        // 자기소개 정보
+        SelfIntroduction selfIntroduction = selfIntroductionRepository.findById(storyList.getSelfIntroduction().getId())
+                .orElseThrow(() -> new Exception("Failed get selfIntroduction"));
+
+        contentDto.setGrowth(selfIntroduction.getGrowth());
+        contentDto.setReason(selfIntroduction.getReason());
+        contentDto.setMeritFault(selfIntroduction.getMeritFault());
+        contentDto.setAspiration(selfIntroduction.getAspiration());
+
+        // 자격증 정보
+        List<Certificate> certificateList = certificateRepository.findByStoryListId(storyList.getId());
+
+        if(certificateList != null && certificateList.size() > 0) {
+            certificateList.forEach(certificate -> {
+                contentDto.getCertificates().add(
+                        CertificateDto.entityToDto(Certificate.builder()
+                        .month(certificate.getMonth())
+                        .name(certificate.getName())
+                        .build()));
+            });
+        }
+
+        // 학력 정보
+        List<Education> educationList = educationRepository.findByStoryListId(storyList.getId());
+
+        if(educationList != null && educationList.size() > 0) {
+            educationList.forEach(education -> {
+                contentDto.getEducations().add(
+                        EducationDto.entityToDto(Education.builder()
+                        .startMonth(education.getStartMonth())
+                        .endMonth(education.getEndMonth())
+                        .name(education.getName())
+                        .supervisionName(education.getSupervisionName())
+                        .build()));
+            });
+        }
+
+        // 수상 정보
+        List<Awarded> awardedList = awardedRepository.findByStoryListId(storyList.getId());
+
+        if(awardedList != null && awardedList.size() > 0) {
+            awardedList.forEach(awarded -> {
+                contentDto.getAwards().add(
+                        AwardedDto.entityToDto(Awarded.builder()
+                        .month(awarded.getMonth())
+                        .name(awarded.getName())
+                        .supervisionName(awarded.getSupervisionName())
+                        .build()));
+            });
+        }
+
+        // 경력 정보
+        List<Career> careerList = careerRepository.findByStoryListId(storyList.getId());
+
+        if(careerList != null && careerList.size() > 0) {
+            careerList.forEach(career -> {
+                contentDto.getCareers().add(
+                        CareerDto.entityToDto(Career.builder()
+                        .startMonth(career.getStartMonth())
+                        .endMonth(career.getEndMonth())
+                        .duty(career.getDuty())
+                        .companyName(career.getCompanyName())
+                        .build()));
+            });
+        }
+
+        // 활동 경험 정보
+        List<ActivityExperience> activityExperienceList = activityExperienceRepository.findByStoryListId(storyList.getId());
+
+        if(activityExperienceList != null && activityExperienceList.size() > 0) {
+            activityExperienceList.forEach(activityExperience -> {
+                contentDto.getActivities().add(
+                        ActivityDto.entityToDto(ActivityExperience.builder()
+                        .startMonth(activityExperience.getStartMonth())
+                        .endMonth(activityExperience.getEndMonth())
+                        .content(activityExperience.getContent())
+                        .build()));
+            });
+        }
+
+        // 학교 이력 정보
+        List<SchoolHistory> schoolHistoryList = schoolHistoryRepository.findByStoryListId(storyList.getId());
+
+        if(schoolHistoryList != null && schoolHistoryList.size() > 0) {
+            schoolHistoryList.forEach(schoolHistory -> {
+                contentDto.getSchools().add(
+                        SchoolDto.entityToDto(SchoolHistory.builder()
+                        .startMonth(schoolHistory.getStartMonth())
+                        .endMonth(schoolHistory.getEndMonth())
+                        .schoolName(schoolHistory.getSchoolName())
+                        .departmentName(schoolHistory.getDepartmentName())
+                        .graduateStatus(schoolHistory.getGraduateStatus())
+                        .gpa(schoolHistory.getGpa())
+                        .gpaMax(schoolHistory.getGpaMax())
+                        .build()));
+            });
+        }
+
+        return contentDto;
 
     }
 

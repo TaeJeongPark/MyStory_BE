@@ -1,7 +1,13 @@
 package supporty.info.mystory.content.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import supporty.info.mystory.content.dto.ContentListResponseDto;
 import supporty.info.mystory.content.entity.StoryList;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * packageName    : supporty.info.mystory.content.repository
@@ -16,6 +22,7 @@ import supporty.info.mystory.content.entity.StoryList;
  */
 public interface StoryListRepository extends JpaRepository<StoryList, Long> {
 
-
+    @Query(value = "SELECT s.title, s.reg_time, s.update_time, s.story_list_id as id FROM story_list s WHERE s.user_id = :userId", nativeQuery = true)
+    List<ContentListResponseDto> findByUserId(@Param("userId") Long userId);
 
 }

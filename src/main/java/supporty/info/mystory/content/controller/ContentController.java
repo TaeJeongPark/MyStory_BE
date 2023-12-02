@@ -1,16 +1,18 @@
 package supporty.info.mystory.content.controller;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import supporty.info.mystory.common.utils.Msg;
+import supporty.info.mystory.content.dto.ContentListResponseDto;
 import supporty.info.mystory.content.dto.ContentRequestDto;
+import supporty.info.mystory.content.entity.StoryList;
 import supporty.info.mystory.content.service.ContentService;
 import supporty.info.mystory.user.dto.UserDto;
+
+import java.util.List;
 
 /**
  * packageName    : supporty.info.mystory.content.controller
@@ -38,6 +40,15 @@ public class ContentController {
         boolean result = contentService.saveContent(contentRequestDto);
 
         return ResponseEntity.ok().body(new Msg(result ? "Success" : "Failed", result));
+
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<Msg> getContentList(@RequestParam Long id) throws Exception {
+
+        List<ContentListResponseDto> result = contentService.getContentList(id);
+
+        return ResponseEntity.ok().body(new Msg((result != null) ? "Success" : "Failed", result));
 
     }
 

@@ -4,11 +4,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import supporty.info.mystory.content.dto.ContentListResponseDto;
 import supporty.info.mystory.content.dto.ContentRequestDto;
 import supporty.info.mystory.content.entity.*;
 import supporty.info.mystory.content.repository.*;
 import supporty.info.mystory.user.entity.User;
 import supporty.info.mystory.user.repository.UserRepository;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * packageName    : supporty.info.mystory.content.service
@@ -204,6 +209,18 @@ public class ContentService {
 
 
         return true;
+
+    }
+
+    public List<ContentListResponseDto> getContentList(Long id) throws Exception {
+
+        if(id == null) throw new Exception("Failed get id");
+
+        List<ContentListResponseDto> storyList = storyListRepository.findByUserId(id);
+
+        log.info("==========> " + storyList.get(0).getId());
+
+        return storyList;
 
     }
 

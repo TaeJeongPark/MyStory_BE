@@ -36,8 +36,20 @@ public class LoginController {
 
         log.info(String.valueOf(userDto.getUserId()));
         log.info(userDto.getAccessToken());
-//        Long id = loginService.getUserInfoWithToken(request.getParameter("access_token"));
+
         boolean result = loginService.join(Long.valueOf(userDto.getUserId()), userDto.getAccessToken());
+
+        return ResponseEntity.ok().body(new Msg(result ? "Success" : "Failed", result));
+
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<Msg> updateUserInfo(@RequestBody UserDto userDto) throws Exception {
+
+        log.info(String.valueOf(userDto.getUserId()));
+        log.info(userDto.getAccessToken());
+
+        boolean result = loginService.updateUserInfo(Long.valueOf(userDto.getUserId()), userDto.getAccessToken());
 
         return ResponseEntity.ok().body(new Msg(result ? "Success" : "Failed", result));
 

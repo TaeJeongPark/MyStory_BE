@@ -1,6 +1,8 @@
 package supporty.info.mystory.user.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import supporty.info.mystory.user.entity.User;
 
 import java.util.Optional;
@@ -18,6 +20,6 @@ import java.util.Optional;
  */
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    User findAccessTokenById(Long id);    // 최종 로그인일시 조회
+    User findAccessTokenById(Long id);              // 사용자 ID로 사용자 정보 조회
 
 }

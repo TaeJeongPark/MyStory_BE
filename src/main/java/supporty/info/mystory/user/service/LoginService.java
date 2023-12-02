@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -110,6 +111,7 @@ public class LoginService {
     }
 
     // 액세스 토큰으로 사용자 정보 가져오기
+    @Transactional(readOnly = true)
     public Long getUserInfoWithToken(String accessToken) throws Exception {
 
         //HttpHeader 생성
@@ -158,40 +160,8 @@ public class LoginService {
 
     }
 
-    // 액세스 토큰으로 카카오 연결 해제
-    public boolean kakaoWithdraw(String accessToken) throws Exception {
-
-        if(accessToken == null || accessToken.length() < 1) throw new Exception("Failed get accessToken");
-
-        int responseCode = 0;
-
-        try {
-            URL url = new URL(KAKAO_API_URI + "/v1/user/unlink");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Authorization", "Bearer " + accessToken);
-
-            responseCode = conn.getResponseCode();
-            log.info("responseCode : " + responseCode);
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-            String result = "";
-            String line = "";
-
-            while ((line = br.readLine()) != null) {
-                result += line;
-            }
-
-            log.info(result);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return responseCode == 200;
-
-    }
-
+    // 회원가입
+    @Transactional
     public boolean join(Long id, String accessToken) throws Exception {
         User check = userRepository.findAccessTokenById(id);
 
@@ -211,6 +181,33 @@ public class LoginService {
         }
 
         return true;
+    }
+
+    // 사용자 정보 업데이트
+    @Transactional
+    public boolean updateUserInfo(Long id, String accessToken) throws Exception {
+
+        if(id == null) throw new Exception("Failed get id");
+        if(accessToken == null) throw new Exception("Failed get accessToken");
+
+        // 사용자 조회
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new Exception("Failed get user"));
+
+        log.info("==========> check : " + user);
+
+        if(user != null) {
+            user.setAccessToken(accessToken);
+            user.setLastLoginAt(LocalDateTime.now());
+            userRepository.save(user);
+
+            log.info("==========> 사용자 정보 업데이트 성공");
+
+            return true;
+        }
+
+        return false;
+
     }
 
 }

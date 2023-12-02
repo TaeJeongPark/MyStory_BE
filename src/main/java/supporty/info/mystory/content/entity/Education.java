@@ -39,4 +39,8 @@ public class Education {
 
     private String supervisionName;         // 주관기관
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "story_list_id")
+    private StoryList storyList;            // 스토리 목록
+
 }

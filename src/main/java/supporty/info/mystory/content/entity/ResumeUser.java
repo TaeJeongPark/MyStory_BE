@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * packageName    : supporty.info.mystory.content.entity
@@ -48,5 +50,8 @@ public class ResumeUser {
     private String military;                // 병역
 
     private String introduction;            // 한 줄 소개
+
+    @OneToOne(mappedBy = "resumeUser", fetch = FetchType.LAZY)
+    private StoryList storyList;            // 스토리 목록
 
 }

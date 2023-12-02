@@ -37,4 +37,8 @@ public class Awarded {
 
     private String supervisionName;         // 수여 기관
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "story_list_id")
+    private StoryList storyList;            // 스토리 목록
+
 }

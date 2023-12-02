@@ -2,6 +2,7 @@ package supporty.info.mystory.content.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import supporty.info.mystory.user.entity.User;
 
 import java.time.LocalDateTime;
 
@@ -34,5 +35,9 @@ public class Certificate {
 
     @Column(nullable = false)
     private String name;                    // 자격증명
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "story_list_id")
+    private StoryList storyList;            // 스토리 목록
 
 }

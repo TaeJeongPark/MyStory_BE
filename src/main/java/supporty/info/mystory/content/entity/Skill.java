@@ -46,4 +46,7 @@ public class Skill {
     @Column(length = 200)
     private String etc;                     // 기타
 
+    @OneToOne(mappedBy = "skill", fetch = FetchType.LAZY)
+    private StoryList storyList;            // 스토리 목록
+
 }

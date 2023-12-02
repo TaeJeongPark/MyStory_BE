@@ -40,4 +40,7 @@ public class SelfIntroduction {
     @Column(length = 2000)
     private String aspiration;              // 포부
 
+    @OneToOne(mappedBy = "selfIntroduction", fetch = FetchType.LAZY)
+    private StoryList storyList;            // 스토리 목록
+
 }

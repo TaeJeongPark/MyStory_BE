@@ -45,4 +45,8 @@ public class SchoolHistory {
 
     private String maxScore;                // 최대 점수
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "story_list_id")
+    private StoryList storyList;            // 스토리 목록
+
 }

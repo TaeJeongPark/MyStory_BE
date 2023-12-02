@@ -2,6 +2,10 @@ package supporty.info.mystory.content.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
+import supporty.info.mystory.content.dto.CertificateDto;
+import supporty.info.mystory.user.dto.UserDto;
 import supporty.info.mystory.user.entity.User;
 
 import java.time.LocalDateTime;
@@ -31,7 +35,7 @@ public class Certificate {
     @Column(name = "certificate_id")
     private Long id;                        // 관리번호
 
-    private LocalDateTime certificateDate;  // 취득년월
+    private String month;                   // 취득년월
 
     @Column(nullable = false)
     private String name;                    // 자격증명

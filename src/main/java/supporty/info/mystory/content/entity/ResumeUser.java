@@ -33,7 +33,11 @@ public class ResumeUser {
     private Long id;                        // 관리번호
 
     @Lob
-    private Blob img;                       // 사진
+    private byte[] img;                     // 사진
+
+    private String imgType;                 // 사진 타입
+
+    private String imgUrl;                  // 사진 URL
 
     private String desireJob;               // 희망 직무
 

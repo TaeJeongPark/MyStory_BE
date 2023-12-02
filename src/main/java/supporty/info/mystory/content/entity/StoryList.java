@@ -36,7 +36,7 @@ public class StoryList extends BaseEntity {
     @Column(nullable = false)
     private String title;                       // 제목
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "int default 1")
     private int state;                          // 상태 코드
 
     @ManyToOne(fetch = FetchType.LAZY)

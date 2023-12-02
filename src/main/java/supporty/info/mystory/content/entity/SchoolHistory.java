@@ -30,20 +30,20 @@ public class SchoolHistory {
     @Column(name = "school_history_id")
     private Long id;                        // 관리번호
 
-    private LocalDateTime startDate;        // 입학일
+    private String startMonth;              // 입학일
 
-    private LocalDateTime endDate;          // 졸업일
+    private String endMonth;                // 졸업일
 
     @Column(nullable = false)
     private String schoolName;              // 학교명
 
     private String departmentName;          // 학과명
 
-    private String graduationStatus;        // 졸업 구분
+    private String graduateStatus;          // 졸업 구분
 
-    private String score;                   // 학점
+    private String gpa;                     // 학점
 
-    private String maxScore;                // 최대 점수
+    private String gpaMax;                  // 최대 점수
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "story_list_id")

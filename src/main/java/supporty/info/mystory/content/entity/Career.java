@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 /**
  * packageName    : supporty.info.mystory.content.entity
- * fileName       : Career
+ * fileName       : CareerDto
  * author         : TaeJeongPark
  * date           : 2023-12-02
  * description    : 경력 Entity
@@ -30,9 +30,9 @@ public class Career {
     @Column(name = "career_id")
     private Long id;                        // 관리번호
 
-    private LocalDateTime startDate;        // 시작일
+    private String startMonth;              // 시작일
 
-    private LocalDateTime endDate;          // 종료일
+    private String endMonth;                // 종료일
 
     private String duty;                    // 직무
 

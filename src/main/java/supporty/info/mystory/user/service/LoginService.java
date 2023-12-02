@@ -20,7 +20,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import supporty.info.mystory.user.dto.UserDto;
 import supporty.info.mystory.user.entity.User;
@@ -150,7 +149,7 @@ public class LoginService {
                     .lastLoginAt(LocalDateTime.now())
                     .build();
 
-            User newUser = userDto.createUsers();
+            User newUser = userDto.dtoToEntity();
 
             userRepository.save(newUser);
         }
@@ -205,7 +204,7 @@ public class LoginService {
                     .lastLoginAt(LocalDateTime.now())
                     .build();
 
-            User newUser = userDto.createUsers();
+            User newUser = userDto.dtoToEntity();
             userRepository.save(newUser);
 
             log.info("==========> 회원가입 성공");

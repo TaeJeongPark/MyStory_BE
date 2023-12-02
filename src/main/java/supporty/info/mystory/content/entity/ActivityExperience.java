@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * fileName       : ActivityExperience
  * author         : TaeJeongPark
  * date           : 2023-12-02
- * description    :
+ * description    : 활동 경험 Entity
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
@@ -30,9 +30,9 @@ public class ActivityExperience {
     @Column(name = "activity_experience_id")
     private Long id;                        // 관리번호
 
-    private LocalDateTime startDate;        // 시작일
+    private String startMonth;              // 시작일
 
-    private LocalDateTime endDate;          // 종료일
+    private String endMonth;                // 종료일
 
     private String content;                 // 활동 내용
 

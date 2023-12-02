@@ -33,7 +33,7 @@ public class UserDto {
     private static ModelMapper modelMapper = new ModelMapper();
 
     // DTO -> Entity 변환
-    public User createUsers() {
+    public User dtoToEntity() {
 
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
         return modelMapper.map(this, User.class);
@@ -41,7 +41,7 @@ public class UserDto {
     }
 
     // Entity -> DTO 변환
-    public static UserDto of(User users) {
+    public static UserDto entityToDto(User users) {
 
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         return modelMapper.map(users, UserDto.class);

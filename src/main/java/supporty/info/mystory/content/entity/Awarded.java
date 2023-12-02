@@ -30,7 +30,7 @@ public class Awarded {
     @Column(name = "awarded_id")
     private Long id;                        // 관리번호
 
-    private LocalDateTime awardedDate;      // 수상일
+    private String month;                   // 수상일
 
     @Column(nullable = false)
     private String name;                    // 수상명

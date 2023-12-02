@@ -30,9 +30,9 @@ public class Education {
     @Column(name = "education_id")
     private Long id;                        // 관리번호
 
-    private LocalDateTime startDate;        // 시작일
+    private String startMonth;              // 시작일
 
-    private LocalDateTime endDate;          // 종료일
+    private String endMonth;                // 종료일
 
     @Column(nullable = false)
     private String name;                    // 교육명

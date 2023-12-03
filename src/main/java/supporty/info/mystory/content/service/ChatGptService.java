@@ -25,7 +25,7 @@ public class ChatGptService {
 
     public String getChatGpt(String sentence) {
 
-        sentence += "이 내용을 첨삭 해줘.";
+        sentence += "이 내용을 300자 정도의 글자 수로 첨삭 해줘.";
         String result = chatGptService.sendMessage(sentence);    // ChatGptService에서 sendMessage()를 호출하여 챗봇의 답변을 받아 옴
         result = result.replaceAll("\n", "");    // 개행 문자 제거
 
